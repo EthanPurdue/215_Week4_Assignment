@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <h2 class = "loginResult"></h2>
+    <script>
+      
+      //  since it was a simpler problem to solve I wanted to see if i could try
+      //  getting a little more creative, using more functions to get more familiar with them.
+      userNameInput = prompt("Please enter your username: ");
+      passwordInput = prompt("Now Please enter your password: ");
+
+
+      //Function that will be called upon in the case login is correct
+      const correctCredentials = (userId) => {
+        console.log ("Welcome " + userId);
+        refToLoginResult = document.querySelector(".loginResult");
+        refToLoginResult.innerHTML = "Welcome " + userId;
+      };
+
+
+      //Function that will be called upon in case login is incorrect
+      //it will tell you what you put in is wrong before giving another opportunity to put login in again
+      //  afterwards it will call upon the credentialChecking() like in the beginning
+      // it sort of acts like a while loop which I thought was cool (if you uncomment the three bottom lines but I need it to show on webpage)
+      const incorrectCredentials = (userId, password) => {
+        alert(`BAD LOGIN CREDENTIALS: ${userId} and ${password}`);
+        console.log("BAD LOGIN CREDENTIALS");
+        //  reference to body tag needs to be made inside of the function
+        //  you won't be able to view webpage until after correct results since it loops, but shows up on console
+        refToLoginResult = document.querySelector(".loginResult");
+        refToLoginResult.innerHTML = "BAD LOGIN CREDENTIALS";
+        //un comment the three lines below to make a 'loop'
+            // userNameInput = prompt("Please enter your username: ");
+            // passwordInput = prompt("Now Please enter your password: ");
+            // credentialChecking(userNameInput, passwordInput);
+      };
+
+      // The actual function to check for validity of input, procs corresponding correctCredentials() or incorrectCredentials()
+      //function based on login inpupts and passes information through to display it
+      const credentialChecking = (userId, password) => {
+        // use ternary but only allows credentials to be "correct" if BOTH username and password match
+        let credentials =
+          userId == "admin" && password == "secret" ? "correct" : "incorrect";
+        console.log(credentials);
+        if (credentials == "correct") {
+          correctCredentials(userId);
+        } else {
+          incorrectCredentials(userId, password);
+        }
+      };
+
+
+      // The actual function I will call upon to start, using user input prompts
+      credentialChecking(userNameInput, passwordInput);
+    </script>
+  </body>
+</html>
